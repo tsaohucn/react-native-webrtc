@@ -1,19 +1,19 @@
 'use strict';
 
 import EventTarget from 'event-target-shim';
-import {DeviceEventEmitter, NativeModules} from 'react-native';
-import * as RTCUtil from './RTCUtil';
-
+import { DeviceEventEmitter, NativeModules } from 'react-native';
 import MediaStream from './MediaStream';
 import MediaStreamEvent from './MediaStreamEvent';
 import MediaStreamTrack from './MediaStreamTrack';
 import MediaStreamTrackEvent from './MediaStreamTrackEvent';
 import RTCDataChannel from './RTCDataChannel';
 import RTCDataChannelEvent from './RTCDataChannelEvent';
-import RTCSessionDescription from './RTCSessionDescription';
+import RTCEvent from './RTCEvent';
 import RTCIceCandidate from './RTCIceCandidate';
 import RTCIceCandidateEvent from './RTCIceCandidateEvent';
-import RTCEvent from './RTCEvent';
+import RTCSessionDescription from './RTCSessionDescription';
+import * as RTCUtil from './RTCUtil';
+
 
 const {WebRTCModule} = NativeModules;
 
@@ -102,6 +102,11 @@ export default class RTCPeerConnection extends EventTarget(PEER_CONNECTION_EVENT
     this._peerConnectionId = nextPeerConnectionId++;
     WebRTCModule.peerConnectionInit(configuration, this._peerConnectionId);
     this._registerEvents();
+  }
+
+  addTransceiver(trackOrKind, init) {
+    console.log("----trackOrKind",trackOrKind)
+    console.log("----init",init)
   }
 
   addStream(stream: MediaStream) {
